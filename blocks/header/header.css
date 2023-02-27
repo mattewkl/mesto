@@ -1,0 +1,15 @@
+.header {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 880px;
+  min-width: 320px;
+  align-self: center;
+  border-bottom: 1px solid #545454;
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    width: calc(320px + (880 - 320) * ((100vw - 320px) / (1279 - 320)));
+  }
+}
