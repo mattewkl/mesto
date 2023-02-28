@@ -21,4 +21,6 @@
 @import url('../blocks/grid-cards/__caption-container/grid-cards__caption-container.css');
 @import url('../blocks/grid-cards/__caption/grid-cards__caption.css');
 @import url('../blocks/grid-cards/__like-button/grid-cards__like-button.css');
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__copyright/footer__copyrigth.css');
 
