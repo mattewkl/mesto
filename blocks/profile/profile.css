@@ -1,8 +1,18 @@
 .profile {
+  padding-top: 40px;
   display: flex;
   flex-direction: row;
   font-family: 'Inter', sans-serif;
-  max-width: 880px;
-  min-width: 320px;
+  width: 68.75%;
+  min-width: 282px;
   align-self: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 846px) {
+  .profile {
+    flex-direction: column;
+    width: calc(282px + (581 - 282) * ((100vw - 320px) / (846 - 320)));
+  }
+  
 }

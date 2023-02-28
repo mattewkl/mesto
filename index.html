@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel = "stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
-  <body class="page">
-    <header class="header">
-      <img src="./images/mesto-logo.svg" class="header__logo">
-    </header>
-    <main class="main">
-      <section class="profile">
+
+<body class="page">
+  <header class="header">
+    <img src="./images/mesto-logo.svg" class="header__logo">
+  </header>
+  <main class="main">
+    <section class="profile">
+      <div class="profile__container">
         <img class="profile__avatar" src="./images/ivcusto.jpg">
         <div class="profile__info-container">
-          <p class="profile__name"><button class="button"><img class="profile__edit-button-picture" src="./images/edit-button.svg"></button></p>
+          <p class="profile__name text">
+            Жак-Ив Кусто
+            <button class="button profile__edit-button"></button>
+          </p>
+          <p class="profile__description text">
+            Исследователь океана
+          </p>
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+      <button class="button profile__add-button"></button>
+    </section>
+  </main>
+</body>
+
 </html>
