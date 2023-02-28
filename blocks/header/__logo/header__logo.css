@@ -6,18 +6,18 @@
   padding-bottom: 41px;
 }
 
-@media screen and (max-width: 1279px) {
-  .header__logo {
-    width: calc(104px + (142 - 104) * ((100vw - 320px) / (1279 - 320)));
-    padding-bottom: calc(32px + (41 - 32) * ((100vw - 320px) / (1279 - 320)));
-  }
-  
-}
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
   .header__logo {
     width: 104px;
     padding-bottom: 32px;
   }
   
 }
+/* 
+@media screen and (max-width: 320px) {
+  .header__logo {
+    width: 104px;
+    
+  }
+  
+} */

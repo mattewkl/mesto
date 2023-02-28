@@ -12,4 +12,12 @@
   .header {
     width: calc(320px + (880 - 320) * ((100vw - 320px) / (1279 - 320)));
   }
+
+}
+
+@media screen and (max-width: 360px) {
+  .header {
+    width: 320px;
+  }
+  
 }

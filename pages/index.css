@@ -1,3 +1,5 @@
+
+
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts/fonts.css');
 @import url('../blocks/page/page.css');
@@ -14,3 +16,9 @@
 @import url('../blocks/profile/__description/profile__description.css');
 @import url('../blocks/profile/__edit-button/profile__edit-button.css');
 @import url('../blocks/profile/__add-button/profile__add-button.css');
+@import url('../blocks/grid-cards/grid-cards.css');
+@import url('../blocks/grid-cards/__item/grid-cards__item.css');
+
+* {
+  outline: 1px solid red;
+}
