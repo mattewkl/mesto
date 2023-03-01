@@ -1,12 +1,21 @@
 .footer {
   display: flex;
-  padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1279 - 320)));
+  align-self: center;
+  width: 880px;
   padding-bottom: 60px;
   padding-top: 66px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
   .footer {
+    width: 67.45%;
+
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    width: 282px;
     padding-top: 48px;
     padding-bottom: 36px;
     padding-left: 19px;
