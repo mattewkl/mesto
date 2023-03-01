@@ -9,13 +9,13 @@
 </head>
 
 <body class="page">
-  <div class="popup popup_opened">
+  <div class="popup">
     
     <form action="#" class="popup__container" >
     <button class="button popup__close-button"></button>
     <label for="text" class="text popup__label">Редактировать профиль</label>
-    <input type="text" name="name" class="popup__form" required>
-    <input type="text" name="description" class="popup__form" required>
+    <input type="text" name="name" class="popup__form" id="name">
+    <input type="text" name="description" class="popup__form" id="description">
     <input type="submit" class="button popup__save-button text" value="Сохранить">
   </form>
   </div>
@@ -87,6 +87,7 @@
   <footer class="footer">
     <p class="footer__copyright text">&copy; 2023 Матвей Семенович Климовский</p>
   </footer>
+  <script src="index.js"></script>
 </body>
 
 </html>
