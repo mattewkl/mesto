@@ -9,10 +9,21 @@
 </head>
 
 <body class="page">
+  <div class="popup popup_opened">
+    
+    <form action="#" class="popup__container" >
+    <button class="button popup__close-button"></button>
+    <label for="text" class="text popup__label">Редактировать профиль</label>
+    <input type="text" name="name" class="popup__form" required>
+    <input type="text" name="description" class="popup__form" required>
+    <input type="submit" class="button popup__save-button text" value="Сохранить">
+  </form>
+  </div>
   <header class="header">
     <img src="./images/mesto-logo.svg" class="header__logo">
   </header>
   <main class="main">
+    
     <section class="profile">
       <div class="profile__container">
         <img class="profile__avatar" src="./images/ivcusto.jpg">
