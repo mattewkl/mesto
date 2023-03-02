@@ -14,7 +14,7 @@
   .profile__description {
     font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (880 - 320)));
     line-height: calc(18px + (22 - 18) * ((100vw - 320px) / (880 - 320)));
-    max-width: 282px;
+    max-width: 250px;
   }
   
 }

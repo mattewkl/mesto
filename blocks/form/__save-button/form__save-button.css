@@ -1,4 +1,4 @@
-.popup__save-button {
+.form__save-button {
   display: flex;
   align-self: center;
   justify-content: space-around;
@@ -16,12 +16,12 @@
   margin-bottom: 37px;
 }
 
-.popup__save-button:hover {
+.form__save-button:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 560px) {
-  .popup__save-button {
+  .form__save-button {
     width: 238px;
     height: 48px;
     margin-bottom: 25px;

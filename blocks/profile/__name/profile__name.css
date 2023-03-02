@@ -6,14 +6,22 @@
   line-height: 48px;
   color: white;
   padding-right: 18px;
-  max-width: 294px;
+  max-width: 282px;
 }
 
 @media screen and (max-width: 1279px) {
   .profile__name {
-    font-size: calc(27px + (42 - 27) * ((100vw - 320px) / (1279 - 320)));
-    line-height: calc(33px + (48 - 33) * ((100vw - 320px) / (1279 - 320)));
+    
     margin-right: 0;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .profile__name {
+    max-width: 189px;
+    font-size: 27px;
+    line-height: 33px;
   }
   
 }
