@@ -1,20 +1,13 @@
 let nameObj = document.querySelector('.profile__name');
 let descriptonObj = document.querySelector('.profile__description');
-
 let nameText = nameObj.textContent;
 let descriptonText = descriptonObj.textContent;
-
 let editButtonObj = document.querySelector('.profile__edit-button')
 let popupObj = document.querySelector('.popup')
 let closeButtonObj = document.querySelector('.popup__close-button')
 let formNameObj = document.querySelector('#name')
 let formDescriptionObj = document.querySelector('#description')
-let submitButtonObj = document.querySelector('.popup__save-button')
 let editFormObj = document.querySelector('.form')
-
-
-console.log(formDescriptionObj.textContent)
-
 
 function openPopup()  {
   popupObj.classList.add('popup_opened');
