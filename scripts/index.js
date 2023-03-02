@@ -10,13 +10,16 @@ let closeButtonObj = document.querySelector('.popup__close-button')
 let formNameObj = document.querySelector('#name')
 let formDescriptionObj = document.querySelector('#description')
 let submitButtonObj = document.querySelector('.popup__save-button')
+let editFormObj = document.querySelector('.form')
 
-formNameObj.value = nameText.trim();
-formDescriptionObj.value =descriptonText.trim();
+
 console.log(formDescriptionObj.textContent)
+
 
 function openPopup()  {
   popupObj.classList.add('popup_opened');
+  formNameObj.value = nameText.trim();
+  formDescriptionObj.value = descriptonText.trim();
 }
 
 function closePopup() {
@@ -33,4 +36,4 @@ function handleFormSubmit(evt) {
 
 editButtonObj.addEventListener('click', openPopup)
 closeButtonObj.addEventListener('click', closePopup)
-submitButtonObj.addEventListener('click', handleFormSubmit)
+editFormObj.addEventListener('submit', handleFormSubmit)

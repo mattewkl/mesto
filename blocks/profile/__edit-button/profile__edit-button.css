@@ -4,6 +4,7 @@
   background-image: url('../../../images/edit-button.svg');
   background-size: contain;
   background-repeat: no-repeat;
+  align-self: center;
 }
 
 @media screen and (max-width: 846px) {
