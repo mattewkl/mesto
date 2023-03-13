@@ -23,6 +23,7 @@
 @import url('../blocks/profile/__add-button/profile__add-button.css');
 @import url('../blocks/grid-cards/grid-cards.css');
 @import url('../blocks/grid-cards/__item/grid-cards__item.css');
+@import url('../blocks/grid-cards/__item-image/grid-cards__item-image.css');
 @import url('../blocks/grid-cards/__caption-container/grid-cards__caption-container.css');
 @import url('../blocks/grid-cards/__caption/grid-cards__caption.css');
 @import url('../blocks/grid-cards/__like-button/grid-cards__like-button.css');
