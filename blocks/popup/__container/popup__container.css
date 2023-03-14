@@ -1,11 +1,12 @@
 .popup__container {
-  display: flex;
+  display: none;
   background-color: white;
   border-radius: 10px;
   margin: auto;
   flex-direction: column;
   width: 430px;
   position: relative;
+  visibility: hidden;
 }
 
 @media screen and (max-width: 560px) {

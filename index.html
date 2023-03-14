@@ -10,15 +10,24 @@
 
 <body class="page">
   <div class="popup">
-    <div class="popup__container">
-    <button class="button popup__close-button" type="button"></button> 
-    <form action="#" class="form" name="edit-user-info">
-      <h2 class="text form__title">Редактировать профиль</h2>
-      <input type="text" name="name" class="form__text-input" id="name">
-      <input type="text" name="description" class="form__text-input" id="description">
-      <input type="submit" class=" form__save-button" value="Сохранить">
-    </form>
-  </div>
+    <div class="popup__container popup__container_purpouse_edit-profile">
+      <button class="button popup__close-button popup__close-button_purpouse_close-edit-profile" type="button"></button>
+      <form action="#" class="form form_purpouse_edit-profile" name="edit-user-info">
+        <h2 class="text form__title">Редактировать профиль</h2>
+        <input type="text" name="name" class="form__text-input form__text-input_purpouse_profile-name" id="name">
+        <input type="text" name="description" class="form__text-input form__text-input_purpouse_profile-description" id="description">
+        <input type="submit" class=" form__save-button" value="Сохранить">
+      </form>
+    </div>
+    <div class="popup__container popup__container_purpouse_add-card">
+      <button class="button popup__close-button popup__close-button_purpouse_close-add-card" type="button"></button>
+      <form action="#" class="form form_purpouse_add-card" name="add-card">
+        <h2 class="text form__title">Новое место</h2>
+        <input required type="text" name="name" class="form__text-input form__text-input_purpouse_place-name" id="place-name" placeholder="Название">
+        <input required type="text" name="description" class="form__text-input form__text-input_purpouse_place-link" id="link" placeholder="Ссылка на картинку">
+        <input type="submit" class=" form__save-button" value="Добавить">
+      </form>
+    </div>
   </div>
   <header class="header">
     <img src="./images/mesto-logo.svg" class="header__logo" alt="Лого проекта место">
