@@ -58,6 +58,10 @@ function addCard(link, name) {
   firstCard.querySelector('.grid-cards__caption').textContent = name;
   gridCards.prepend(firstCard);
   const deleteCardButton = firstCard.querySelector('.grid-cards__delete-btn')
+  const likeButton = firstCard.querySelector('.grid-cards__like-button')
+  likeButton.addEventListener('click', function() {
+    likeButton.classList.toggle('grid-cards__like-button_active')
+  })
   deleteCardButton.addEventListener('click', function(event) {
     event.target.parentNode.remove()
   })
