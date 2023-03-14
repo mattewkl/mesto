@@ -6,4 +6,6 @@
   flex-direction: column;
   max-width: 282px;
   justify-self: center;
+  position: relative;
+  z-index: 0;
 }

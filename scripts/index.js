@@ -57,11 +57,18 @@ function addCard(link, name) {
   firstCard.querySelector('.grid-cards__item-image').alt = name;
   firstCard.querySelector('.grid-cards__caption').textContent = name;
   gridCards.prepend(firstCard);
+  const deleteCardButton = firstCard.querySelector('.grid-cards__delete-btn')
+  deleteCardButton.addEventListener('click', function(event) {
+    event.target.parentNode.remove()
+  })
+  
+
 
 }
 
 
 initialCards.forEach(element => addCard(element.link, element.name));
+
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
@@ -111,3 +118,6 @@ closeEditPopupButton.addEventListener('click', closePopup)
 closeAddPopupButton.addEventListener('click', closePopup)
 editFormObj.addEventListener('submit', handleEditFormSubmit)
 addCardFormObj.addEventListener('submit', handleAddCardFormSubmit)
+// deleteCardButton.addEventListener('click', function(event) {
+//   event.target.parentNode.remove()
+// })
