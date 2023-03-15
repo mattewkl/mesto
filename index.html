@@ -9,25 +9,37 @@
 </head>
 
 <body class="page">
-  <div class="popup">
-    <div class="popup__container popup__container_purpouse_edit-profile">
-      <button class="button popup__close-button popup__close-button_purpouse_close-edit-profile" type="button"></button>
+  <div class="popup popup_purpouse_edit-profile">
+    <div class="popup__container">
+      <button class="button popup__close-button" type="button"></button>
       <form action="#" class="form form_purpouse_edit-profile" name="edit-user-info">
         <h2 class="text form__title">Редактировать профиль</h2>
         <input type="text" name="name" class="form__text-input form__text-input_purpouse_profile-name" id="name">
-        <input type="text" name="description" class="form__text-input form__text-input_purpouse_profile-description" id="description">
+        <input type="text" name="description" class="form__text-input form__text-input_purpouse_profile-description"
+          id="description">
         <input type="submit" class=" form__save-button" value="Сохранить">
       </form>
     </div>
-    <div class="popup__container popup__container_purpouse_add-card">
-      <button class="button popup__close-button popup__close-button_purpouse_close-add-card" type="button"></button>
+  </div>
+  <div class="popup popup_purpouse_add-card">
+    <div class="popup__container">
+      <button class="button popup__close-button" type="button"></button>
       <form action="#" class="form form_purpouse_add-card" name="add-card">
         <h2 class="text form__title">Новое место</h2>
-        <input required type="text" name="name" class="form__text-input form__text-input_purpouse_place-name" id="place-name" placeholder="Название">
-        <input required type="text" name="description" class="form__text-input form__text-input_purpouse_place-link" id="link" placeholder="Ссылка на картинку">
-        <input type="submit" class=" form__save-button" value="Добавить">
+        <input required type="text" name="place-name" class="form__text-input form__text-input_purpouse_place-name"
+          id="place-name" placeholder="Название">
+        <input required type="text" name="link" class="form__text-input form__text-input_purpouse_place-link" id="link"
+          placeholder="Ссылка на картинку">
+        <input type="submit" class="form__save-button" value="Добавить">
       </form>
     </div>
+  </div>
+  <div class="popup popup_purpouse_figure">
+    <figure class="popup__figure-popup">
+      <button class="button popup__close-button " type="button"></button>
+      <img class="popup__figure-popup-image" src="#" alt="#">
+      <figcaption class="text popup__figure-popup-caption"></figcaption>
+    </figure>
   </div>
   <header class="header">
     <img src="./images/mesto-logo.svg" class="header__logo" alt="Лого проекта место">
@@ -50,7 +62,6 @@
       </div>
       <button class="button profile__add-button" type="button"></button>
     </section>
-
     <template id="card-template">
       <div class="grid-cards__item">
         <button class="button grid-cards__delete-btn" type="button"></button>
@@ -59,6 +70,7 @@
           <h2 class="text grid-cards__caption"></h2>
           <button class="button grid-cards__like-button" type="button"></button>
         </div>
+      </div>
     </template>
     <section class="grid-cards">
     </section>
