@@ -3,9 +3,8 @@
   align-self: center;
   justify-content: start;
   flex-direction: column;
-  margin-bottom: 15px;
 }
 
 .popup__text-input-container:last-of-type {
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 }

@@ -8,6 +8,7 @@
   color: red;
   visibility: hidden;
   width: 358px;
+  min-height: 30px;
 }
 
 @media screen and (max-width: 560px) {

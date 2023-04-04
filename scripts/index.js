@@ -7,6 +7,7 @@ const buttonCloseEditPopup = popupOpenEditProfile.querySelector('.popup__close-b
 const formNameObj = document.querySelector('.popup__form-text-input_purpouse_profile-name')
 const formDescriptionObj = document.querySelector('.popup__form-text-input_purpouse_profile-description')
 const formEditObj = document.querySelector('.popup__form_purpouse_edit-profile')
+const submitButtonFromProfileForm = formEditObj.querySelector('.popup__form-save-button')
 const arrOfFormEditTextInput = [formNameObj, formDescriptionObj]
 
 function handleEditFormSubmit(evt) {
@@ -22,7 +23,7 @@ function openEditPopup() {
   const descriptonText = descriptonObj.textContent;
   formNameObj.value = nameText.trim();
   formDescriptionObj.value = descriptonText.trim();
-  manageSubmitButton(arrOfFormEditTextInput, formEditObj, config.submitButtonSelector, config.submitButtonDisabledClass)
+  manageSubmitButton(arrOfFormEditTextInput, submitButtonFromProfileForm, config.submitButtonDisabledClass)
   console.log(formNameObj.name)
   console.log(formDescriptionObj.name)
   arrOfFormEditTextInput.forEach((input) =>  setValidityBasedClass(input, config.invalidationErrorSelector, config.visibleInvalidationErrorClass, config.textInputInvalidClass))
@@ -89,6 +90,7 @@ const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
 const cardTemplate = document.querySelector('#card-template').content;
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
 const gridCards = document.querySelector('.grid-cards')
+const submitButtonFromAddCard = formAddCard.querySelector('.popup__form-save-button')
 const initialCards = [
   {
     name: 'Архыз',
@@ -121,8 +123,8 @@ function toggleLike (object) {
 }    
 
 
-function deleteParentOnClick (event) {
-  event.target.parentNode.remove()
+function deleteClosestOnClick (event, elementSelector) {
+  event.target.closest(elementSelector).remove()
 }    
 
 function createCard(link, name) {
@@ -135,24 +137,29 @@ function createCard(link, name) {
   const likeButton = firstCard.querySelector('.grid-cards__like-button')
   cardImage.addEventListener('click',() => openFigurePopup(name, link)); 
   likeButton.addEventListener('click',() => toggleLike(likeButton));
-  deleteCardButton.addEventListener('click', event => deleteParentOnClick(event) )
+  deleteCardButton.addEventListener('click', event => deleteClosestOnClick(event, '.grid-cards__item') )
 
   return firstCard
 }    
 
-initialCards.forEach(element => gridCards.prepend(createCard(element.link, element.name)));
+initialCards.forEach(element => prependElementInContainer(gridCards, createCard(element.link, element.name)));
+
+
+function prependElementInContainer(container, element) {
+  container.prepend(element)
+}
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  gridCards.prepend(createCard(formPlaceLinkObj.value, formPlaceNameObj.value));
+  prependElementInContainer(gridCards, (createCard(formPlaceLinkObj.value, formPlaceNameObj.value)));
   closePopup(popupAddCard);
 }      
 
 function openAddPopup() {
   arrOfAddCardTextInput.forEach((input) => hideInvalidationMessage(input, config.textInputInvalidClass, config.visibleInvalidationErrorClass, config.invalidationErrorSelector))
-  manageSubmitButton(arrOfAddCardTextInput, formAddCard, config.submitButtonSelector, config.submitButtonDisabledClass)
   formPlaceLinkObj.value = '';
   formPlaceNameObj.value = '';
+  manageSubmitButton(arrOfAddCardTextInput, submitButtonFromAddCard, config.submitButtonDisabledClass)
   openPopupOverlay(popupAddCard);
 }    
 

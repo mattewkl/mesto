@@ -1,5 +1,5 @@
 const config = {
-  forms: Array.from(document.querySelectorAll('.popup__form')),
+  forms: '.popup__form',
   invalidationErrorSelector: '.popup__invalid_from_', 
   submitButtonSelector: '.popup__form-save-button',
   submitButtonDisabledClass: 'popup__form-save-button_disabled',
@@ -14,14 +14,20 @@ const testInput = document.querySelector('.popup__form-text-input_purpouse_profi
 
 
 
-function setEventListeners(config) {
-  config.forms.forEach((form) => {
+function enableValidation(config) {
+  const formsArray = Array.from(document.querySelectorAll(config.forms))
+  console.log(formsArray)
+  setEventListeners(formsArray, config) }
+
+function setEventListeners(formsArray, config) {
+  formsArray.forEach((form) => {
     const inputList = Array.from(form.querySelectorAll(config.textInputSelector))
+    const button = form.querySelector(config.submitButtonSelector)
     inputList.forEach((input) => {
       console.log(input)
       input.addEventListener('input', () => {
       setValidityBasedClass(input, config.invalidationErrorSelector, config.visibleInvalidationErrorClass, config.textInputInvalidClass);
-      manageSubmitButton(inputList, form, config.submitButtonSelector, config.submitButtonDisabledClass)
+      manageSubmitButton(inputList, button, config.submitButtonDisabledClass)
     })
     })
   })
@@ -55,8 +61,7 @@ function hideInvalidationMessage(input, textInputInvalidClass, visibleInvalidati
   invalidationError.textContent = ''
 }
 
-function manageSubmitButton(inputList, form, submitButtonSelector, submitButtonDisabledClass ) {
-  const button = form.querySelector(submitButtonSelector)
+function manageSubmitButton(inputList, button, submitButtonDisabledClass ) {
   if (isValid(inputList)) {
     button.classList.remove(submitButtonDisabledClass)
     button.disabled = false
@@ -70,10 +75,13 @@ function manageSubmitButton(inputList, form, submitButtonSelector, submitButtonD
 
 function isValid(inputList) {
   if (inputList.every((input) => input.validity.valid)) {
+    console.log('+')
     return true
   }
   else {
+    console.log('-')
     return false
+    
   }
 }
 
@@ -91,6 +99,6 @@ function checkValidity(input) {
   }
 }
 
-setEventListeners(config);
+enableValidation(config);
 
 // testInput.addEventListener('input', (e) => setValidityBasedClass(e, config.invalidationErrorSelector, config.visibleInvalidationErrorClass, config.textInputInvalidClass))

@@ -12,18 +12,18 @@
   <div class="popup popup_purpouse_edit-profile">
     <div class="popup__container">
       <button class="button popup__close-button" type="button"></button>
-      <form action="#" class="popup__form popup__form_purpouse_edit-profile" name="edit-user-info">
+      <form action="#" class="popup__form popup__form_purpouse_edit-profile" name="edit-user-info" novalidate>
         <h2 class="text popup__form-title">Редактировать профиль</h2>
         <div class="popup__text-input-container">
           <input type="text" minlength="2" maxlength="40"
            class="popup__form-text-input popup__form-text-input_purpouse_profile-name "
-           name="name" required novalidate>
+           name="name" required >
           <span class="popup__invalid popup__invalid_from_name"></span>
         </div>
         <div class="popup__text-input-container">
           <input type="text" class="popup__form-text-input popup__form-text-input_purpouse_profile-description"
           name="description"
-          minlength="2" maxlength="200" required novalidate>
+          minlength="2" maxlength="200" required>
           <span class="popup__invalid popup__invalid_from_description"></span>
         </div>
         <input type="submit" class="popup__form-save-button" value="Сохранить">
@@ -33,19 +33,19 @@
   <div class="popup popup_purpouse_add-card">
     <div class="popup__container">
       <button class="button popup__close-button" type="button"></button>
-      <form action="#" class="popup__form popup__form_purpouse_add-card" name="add-card">
+      <form action="#" class="popup__form popup__form_purpouse_add-card" name="add-card" >
         <h2 class="text popup__form-title">Новое место</h2>
         <div class="popup__text-input-container">
           <input required type="text" name="place-name"
           class="popup__form-text-input popup__form-text-input_purpouse_place-name"
           placeholder="Название"
-          maxlength="30" minlength="2" novalidate>
+          maxlength="30" minlength="2" >
           <span class="popup__invalid popup__invalid_from_place-name"></span>
         </div>
         <div class="popup__text-input-container">
           <input required type="url" name="link"
           class="popup__form-text-input popup__form-text-input_purpouse_place-link"
-          placeholder="Ссылка на картинку" novalidate>
+          placeholder="Ссылка на картинку" >
           <span class="popup__invalid popup__invalid_from_link"></span>
         </div>
           <input type="submit" class="popup__form-save-button popup__form-save-button_disabled" value="Добавить">
