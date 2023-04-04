@@ -14,9 +14,18 @@
       <button class="button popup__close-button" type="button"></button>
       <form action="#" class="popup__form popup__form_purpouse_edit-profile" name="edit-user-info">
         <h2 class="text popup__form-title">Редактировать профиль</h2>
-        <input type="text" name="name" class="popup__form-text-input popup__form-text-input_purpouse_profile-name" id="name">
-        <input type="text" name="description" class="popup__form-text-input popup__form-text-input_purpouse_profile-description"
-          id="description">
+        <div class="popup__text-input-container">
+          <input type="text" minlength="2" maxlength="40"
+           class="popup__form-text-input popup__form-text-input_purpouse_profile-name "
+           name="name" required novalidate>
+          <span class="popup__invalid popup__invalid_from_name"></span>
+        </div>
+        <div class="popup__text-input-container">
+          <input type="text" class="popup__form-text-input popup__form-text-input_purpouse_profile-description"
+          name="description"
+          minlength="2" maxlength="200" required novalidate>
+          <span class="popup__invalid popup__invalid_from_description"></span>
+        </div>
         <input type="submit" class="popup__form-save-button" value="Сохранить">
       </form>
     </div>
@@ -26,11 +35,20 @@
       <button class="button popup__close-button" type="button"></button>
       <form action="#" class="popup__form popup__form_purpouse_add-card" name="add-card">
         <h2 class="text popup__form-title">Новое место</h2>
-        <input required type="text" name="place-name" class="popup__form-text-input popup__form-text-input_purpouse_place-name"
-          id="place-name" placeholder="Название">
-        <input required type="text" name="link" class="popup__form-text-input popup__form-text-input_purpouse_place-link" id="link"
-          placeholder="Ссылка на картинку">
-        <input type="submit" class="popup__form-save-button" value="Добавить">
+        <div class="popup__text-input-container">
+          <input required type="text" name="place-name"
+          class="popup__form-text-input popup__form-text-input_purpouse_place-name"
+          placeholder="Название"
+          maxlength="30" minlength="2" novalidate>
+          <span class="popup__invalid popup__invalid_from_place-name"></span>
+        </div>
+        <div class="popup__text-input-container">
+          <input required type="url" name="link"
+          class="popup__form-text-input popup__form-text-input_purpouse_place-link"
+          placeholder="Ссылка на картинку" novalidate>
+          <span class="popup__invalid popup__invalid_from_link"></span>
+        </div>
+          <input type="submit" class="popup__form-save-button popup__form-save-button_disabled" value="Добавить">
       </form>
     </div>
   </div>
@@ -78,7 +96,9 @@
   <footer class="footer">
     <p class="footer__copyright text">&copy; 2023 Матвей Семенович Климовский</p>
   </footer>
-  <script src="./scripts/index.js"></script>
+  <script defer src="./scripts/validation.js"></script>
+  <script defer src="./scripts/index.js"></script>
+
 </body>
 
 </html>

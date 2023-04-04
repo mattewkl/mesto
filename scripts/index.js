@@ -1,5 +1,3 @@
-
-
 // editpopup vars
 const nameObj = document.querySelector('.profile__name');
 const descriptonObj = document.querySelector('.profile__description');
@@ -9,6 +7,7 @@ const buttonCloseEditPopup = popupOpenEditProfile.querySelector('.popup__close-b
 const formNameObj = document.querySelector('.popup__form-text-input_purpouse_profile-name')
 const formDescriptionObj = document.querySelector('.popup__form-text-input_purpouse_profile-description')
 const formEditObj = document.querySelector('.popup__form_purpouse_edit-profile')
+const arrOfFormEditTextInput = [formNameObj, formDescriptionObj]
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -23,6 +22,10 @@ function openEditPopup() {
   const descriptonText = descriptonObj.textContent;
   formNameObj.value = nameText.trim();
   formDescriptionObj.value = descriptonText.trim();
+  manageSubmitButton(arrOfFormEditTextInput, formEditObj, config.submitButtonSelector, config.submitButtonDisabledClass)
+  console.log(formNameObj.name)
+  console.log(formDescriptionObj.name)
+  arrOfFormEditTextInput.forEach((input) =>  setValidityBasedClass(input, config.invalidationErrorSelector, config.visibleInvalidationErrorClass, config.textInputInvalidClass))
 }
 
 
@@ -39,12 +42,37 @@ function openFigurePopup(name, link) {
   figurePopupCaption.textContent = name
 }      
 
+
+//closebyEcs vars
+const formsArray = Array.from(document.querySelectorAll('.popup'))
+console.log(Array.isArray(figurePopup.classList),)
+
+
+function closePopupByOverlayClick (e) {
+  const openedPopup = document.querySelector('.popup_opened')
+  if (e.target === e.currentTarget) {
+    closePopup(openedPopup)
+  }
+};
+
+
+function closePopupByEsc(evt) {
+  const openedPopup = document.querySelector('.popup_opened')
+  if (evt.keyCode === 27) {
+    closePopup(openedPopup);
+  }
+}
+
+
 function openPopupOverlay(popupObj)  {
+  window.addEventListener('keydown',closePopupByEsc)
   popupObj.classList.add('popup_opened');
+  
 }    
 
 function closePopup(popupObj) {
-  popupObj.classList.remove('popup_opened')  
+  popupObj.classList.remove('popup_opened')
+  window.removeEventListener('keydown',closePopupByEsc)  
 }
 
 
@@ -54,6 +82,7 @@ function closePopup(popupObj) {
 // addcard vars
 const formPlaceNameObj = document.querySelector('.popup__form-text-input_purpouse_place-name')
 const formPlaceLinkObj = document.querySelector('.popup__form-text-input_purpouse_place-link')
+const arrOfAddCardTextInput = [formPlaceNameObj, formPlaceLinkObj]
 const popupAddCard = document.querySelector('.popup_purpouse_add-card')
 const closeAddPopupButton = popupAddCard.querySelector('.popup__close-button')
 const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
@@ -120,12 +149,14 @@ function handleAddCardFormSubmit(evt) {
 }      
 
 function openAddPopup() {
+  arrOfAddCardTextInput.forEach((input) => hideInvalidationMessage(input, config.textInputInvalidClass, config.visibleInvalidationErrorClass, config.invalidationErrorSelector))
+  manageSubmitButton(arrOfAddCardTextInput, formAddCard, config.submitButtonSelector, config.submitButtonDisabledClass)
   formPlaceLinkObj.value = '';
   formPlaceNameObj.value = '';
   openPopupOverlay(popupAddCard);
 }    
 
-
+// closeEventListeners
 
 
 buttonOpenEditProfile.addEventListener('click', openEditPopup)
@@ -133,5 +164,11 @@ buttonOpenAddCardPopup.addEventListener('click', openAddPopup)
 buttonCloseEditPopup.addEventListener('click', () => closePopup(popupOpenEditProfile))
 closeAddPopupButton.addEventListener('click', () => closePopup(popupAddCard))
 closeFigurePopupButton.addEventListener('click', () => closePopup(figurePopup))
+popupOpenEditProfile.addEventListener('click', (e) => closePopupByOverlayClick(e) )
+popupAddCard.addEventListener('click', (e) => closePopupByOverlayClick(e))
+figurePopup.addEventListener('click', (e) => closePopupByOverlayClick(e))
 formEditObj.addEventListener('submit', handleEditFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
+
+
+// поправь клик на маусдаун а не на масуап при закрытии попапа при клике на оверлей
