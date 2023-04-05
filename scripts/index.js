@@ -50,16 +50,16 @@ console.log(Array.isArray(figurePopup.classList),)
 
 
 function closePopupByOverlayClick (e) {
-  const openedPopup = document.querySelector('.popup_opened')
   if (e.target === e.currentTarget) {
-    closePopup(openedPopup)
+    closePopup(e.target)
   }
 };
 
 
 function closePopupByEsc(evt) {
-  const openedPopup = document.querySelector('.popup_opened')
+  
   if (evt.keyCode === 27) {
+    const openedPopup = document.querySelector('.popup_opened')
     closePopup(openedPopup);
   }
 }
@@ -91,32 +91,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
 const gridCards = document.querySelector('.grid-cards')
 const submitButtonFromAddCard = formAddCard.querySelector('.popup__form-save-button')
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },  
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },  
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },  
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },  
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },  
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }  
-];   
+
 
 function toggleLike (object) {
   object.classList.toggle('grid-cards__like-button_active')
@@ -127,22 +102,22 @@ function deleteClosestOnClick (event, elementSelector) {
   event.target.closest(elementSelector).remove()
 }    
 
-function createCard(link, name) {
+function createCard(object) {
   const firstCard = cardTemplate.querySelector('.grid-cards__item').cloneNode(true);
   const cardImage = firstCard.querySelector('.grid-cards__item-image');
-  cardImage.src = link;
-  cardImage.alt = name;
-  firstCard.querySelector('.grid-cards__caption').textContent = name;
+  cardImage.src = object.link;
+  cardImage.alt = object.name;
+  firstCard.querySelector('.grid-cards__caption').textContent = object.name;
   const deleteCardButton = firstCard.querySelector('.grid-cards__delete-btn')
   const likeButton = firstCard.querySelector('.grid-cards__like-button')
-  cardImage.addEventListener('click',() => openFigurePopup(name, link)); 
+  cardImage.addEventListener('click',() => openFigurePopup(object.name, object.link)); 
   likeButton.addEventListener('click',() => toggleLike(likeButton));
   deleteCardButton.addEventListener('click', event => deleteClosestOnClick(event, '.grid-cards__item') )
 
   return firstCard
 }    
 
-initialCards.forEach(element => prependElementInContainer(gridCards, createCard(element.link, element.name)));
+initialCards.forEach(element => prependElementInContainer(gridCards, createCard(element)));
 
 
 function prependElementInContainer(container, element) {
@@ -151,7 +126,11 @@ function prependElementInContainer(container, element) {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  prependElementInContainer(gridCards, (createCard(formPlaceLinkObj.value, formPlaceNameObj.value)));
+  const dataObject = {
+    name : formPlaceNameObj.value,
+    link : formPlaceLinkObj.value
+  }
+  prependElementInContainer(gridCards, (createCard(dataObject)));
   closePopup(popupAddCard);
 }      
 
