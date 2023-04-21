@@ -1,3 +1,6 @@
+import { initialCards } from "./dataobjects.js";
+import { Card } from "./Card.js";
+
 // editpopup vars
 const nameObj = document.querySelector('.profile__name');
 const descriptonObj = document.querySelector('.profile__description');
@@ -31,15 +34,15 @@ function openEditPopup() {
 
 
 // figurePopup vars
-const figurePopup = document.querySelector('.popup_purpouse_figure')
+export const figurePopup = document.querySelector('.popup_purpouse_figure')
 const closeFigurePopupButton = figurePopup.querySelector('.popup__close-button')
-const figurePopupImage = figurePopup.querySelector('.popup__figure-popup-image')
-const figurePopupCaption = figurePopup.querySelector('.popup__figure-popup-caption')
+export const figurePopupImage = figurePopup.querySelector('.popup__figure-popup-image')
+export const figurePopupCaption = figurePopup.querySelector('.popup__figure-popup-caption')
 
 function openFigurePopup(name, link) {
   openPopupOverlay(figurePopup);
-  figurePopupImage.src = link
-  figurePopupImage.alt = name
+  figurePopupImage.src = link;
+  figurePopupImage.alt = name;
   figurePopupCaption.textContent = name
 }      
 
@@ -73,14 +76,12 @@ function openPopupOverlay(popupObj)  {
 
 function closePopup(popupObj) {
   popupObj.classList.remove('popup_opened')
-  window.removeEventListener('keydown',closePopupByEsc)  
+  window.removeEventListener('keydown',closePopupByEsc)   
 }
 
 
-
-
-
 // addcard vars
+const card1 = new Card(initialCards[0], '#card-template')
 const formPlaceNameObj = document.querySelector('.popup__form-text-input_purpouse_place-name')
 const formPlaceLinkObj = document.querySelector('.popup__form-text-input_purpouse_place-link')
 const arrOfAddCardTextInput = [formPlaceNameObj, formPlaceLinkObj]
@@ -89,35 +90,13 @@ const closeAddPopupButton = popupAddCard.querySelector('.popup__close-button')
 const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
 const cardTemplate = document.querySelector('#card-template').content;
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
-const gridCards = document.querySelector('.grid-cards')
+export const gridCards = document.querySelector('.grid-cards')
 const submitButtonFromAddCard = formAddCard.querySelector('.popup__form-save-button')
 
 
-function toggleLike (object) {
-  object.classList.toggle('grid-cards__like-button_active')
-}    
-
-
-function deleteClosestOnClick (event, elementSelector) {
-  event.target.closest(elementSelector).remove()
-}    
-
-function createCard(object) {
-  const firstCard = cardTemplate.querySelector('.grid-cards__item').cloneNode(true);
-  const cardImage = firstCard.querySelector('.grid-cards__item-image');
-  cardImage.src = object.link;
-  cardImage.alt = object.name;
-  firstCard.querySelector('.grid-cards__caption').textContent = object.name;
-  const deleteCardButton = firstCard.querySelector('.grid-cards__delete-btn')
-  const likeButton = firstCard.querySelector('.grid-cards__like-button')
-  cardImage.addEventListener('click',() => openFigurePopup(object.name, object.link)); 
-  likeButton.addEventListener('click',() => toggleLike(likeButton));
-  deleteCardButton.addEventListener('click', event => deleteClosestOnClick(event, '.grid-cards__item') )
-
-  return firstCard
-}    
-
-initialCards.forEach(element => prependElementInContainer(gridCards, createCard(element)));
+initialCards.forEach(element => {
+  const card = new Card(element, '#card-template')
+  prependElementInContainer(gridCards, card.createCardDOMElement())});
 
 
 function prependElementInContainer(container, element) {
@@ -130,15 +109,17 @@ function handleAddCardFormSubmit(evt) {
     name : formPlaceNameObj.value,
     link : formPlaceLinkObj.value
   }
-  prependElementInContainer(gridCards, (createCard(dataObject)));
+  const cardObject = new Card(dataObject, '#card-template')
+  prependElementInContainer(gridCards, cardObject.createCardDOMElement());
+  console.log('CARD CREATED')
   closePopup(popupAddCard);
 }      
 
 function openAddPopup() {
-  arrOfAddCardTextInput.forEach((input) => hideInvalidationMessage(input, config.textInputInvalidClass, config.visibleInvalidationErrorClass, config.invalidationErrorSelector))
+  // arrOfAddCardTextInput.forEach((input) => hideInvalidationMessage(input, config.textInputInvalidClass, config.visibleInvalidationErrorClass, config.invalidationErrorSelector))
   formPlaceLinkObj.value = '';
   formPlaceNameObj.value = '';
-  manageSubmitButton(arrOfAddCardTextInput, submitButtonFromAddCard, config.submitButtonDisabledClass)
+  // manageSubmitButton(arrOfAddCardTextInput, submitButtonFromAddCard, config.submitButtonDisabledClass)
   openPopupOverlay(popupAddCard);
 }    
 

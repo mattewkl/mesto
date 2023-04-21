@@ -1,22 +1,48 @@
-const config = {
-  forms: '.popup__form',
-  invalidationErrorSelector: '.popup__invalid_from_', 
-  submitButtonSelector: '.popup__form-save-button',
-  submitButtonDisabledClass: 'popup__form-save-button_disabled',
-  textInputSelector: '.popup__form-text-input',
-  textInputInvalidClass: 'popup__form-text-input_invalid',
-  visibleInvalidationErrorClass: 'popup__invalid_visible'
+import { validationConfig as config } from "./dataobjects"
+// export const validationConfig = {
+//   forms: '.popup__form',
+//   invalidationErrorSelector: '.popup__invalid_from_', 
+//   submitButtonSelector: '.popup__form-save-button',
+//   submitButtonDisabledClass: 'popup__form-save-button_disabled',
+//   textInputSelector: '.popup__form-text-input',
+//   textInputInvalidClass: 'popup__form-text-input_invalid',
+//   visibleInvalidationErrorClass: 'popup__invalid_visible'
+// }
+class FormValidator {
+  constructor (config, formElement) {
+    this._formElement = formElement;
+    this._formsSelector = config.forms;
+    this._invalidationErrorSelector = config.invalidationErrorSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._submitButtonDisabledClass = config.submitButtonDisabledClass;
+    this._textInputSelector = config.textInputSelector;
+    this._visibleInvalidationErrorClass = config.visibleInvalidationErrorClass;
+    this._buttonElement = this._formElement.querySelector(config.submitButtonSelector);
+
+    
+  }
+
+  enableValidation() {
+    this.setEventListeners(this._formElement, this._textInputSelector, this._submitButtonSelector, this._invalidationErrorSelector, this._visibleInvalidationErrorClass, this._textInputInvalidClass, this._submitButtonDisabledClass)
+  }
+
+  _setEventListeners(formElement, textInputSelector, buttonElement, invalidationErrorSelector, visibleInvalidationErrorClass, textInputInvalidClass, submitButtonDisabledClass) {
+    this._inputList = Array.from(formElement.querySelectorAll(textInputSelector));
+    this._inputList.forEach((input) => {
+      input.addEventListener('input', () => {
+        this._setValidityBasedClass()
+      })
+
+    })
+  }
 }
 
 console.log(config.forms)
-
-const testInput = document.querySelector('.popup__form-text-input_purpouse_profile-name')
 
 
 
 function enableValidation(config) {
   const formsArray = Array.from(document.querySelectorAll(config.forms))
-  console.log(formsArray)
   setEventListeners(formsArray, config) }
 
 function setEventListeners(formsArray, config) {
