@@ -1,5 +1,7 @@
 import { initialCards } from "./dataobjects.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./validation.js";
+import { validationConfig as config } from "./dataobjects.js"
 
 // editpopup vars
 const nameObj = document.querySelector('.profile__name');
@@ -10,8 +12,10 @@ const buttonCloseEditPopup = popupOpenEditProfile.querySelector('.popup__close-b
 const formNameObj = document.querySelector('.popup__form-text-input_purpouse_profile-name')
 const formDescriptionObj = document.querySelector('.popup__form-text-input_purpouse_profile-description')
 const formEditObj = document.querySelector('.popup__form_purpouse_edit-profile')
-const submitButtonFromProfileForm = formEditObj.querySelector('.popup__form-save-button')
-const arrOfFormEditTextInput = [formNameObj, formDescriptionObj]
+const editPopupValidationObject = new FormValidator(config, formEditObj);
+editPopupValidationObject.enableValidation();
+
+
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
@@ -26,10 +30,9 @@ function openEditPopup() {
   const descriptonText = descriptonObj.textContent;
   formNameObj.value = nameText.trim();
   formDescriptionObj.value = descriptonText.trim();
-  manageSubmitButton(arrOfFormEditTextInput, submitButtonFromProfileForm, config.submitButtonDisabledClass)
+  editPopupValidationObject.prototypePublicResetMethod();
   console.log(formNameObj.name)
   console.log(formDescriptionObj.name)
-  arrOfFormEditTextInput.forEach((input) =>  setValidityBasedClass(input, config.invalidationErrorSelector, config.visibleInvalidationErrorClass, config.textInputInvalidClass))
 }
 
 
@@ -48,8 +51,6 @@ function openFigurePopup(name, link) {
 
 
 //closebyEcs vars
-const formsArray = Array.from(document.querySelectorAll('.popup'))
-console.log(Array.isArray(figurePopup.classList),)
 
 
 function closePopupByOverlayClick (e) {
@@ -81,18 +82,16 @@ function closePopup(popupObj) {
 
 
 // addcard vars
-const card1 = new Card(initialCards[0], '#card-template')
 const formPlaceNameObj = document.querySelector('.popup__form-text-input_purpouse_place-name')
 const formPlaceLinkObj = document.querySelector('.popup__form-text-input_purpouse_place-link')
-const arrOfAddCardTextInput = [formPlaceNameObj, formPlaceLinkObj]
+const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
 const popupAddCard = document.querySelector('.popup_purpouse_add-card')
 const closeAddPopupButton = popupAddCard.querySelector('.popup__close-button')
-const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
-const cardTemplate = document.querySelector('#card-template').content;
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
 export const gridCards = document.querySelector('.grid-cards')
-const submitButtonFromAddCard = formAddCard.querySelector('.popup__form-save-button')
 
+const addPopupValidationObject = new FormValidator(config, formAddCard)
+addPopupValidationObject.enableValidation();
 
 initialCards.forEach(element => {
   const card = new Card(element, '#card-template')
@@ -116,10 +115,9 @@ function handleAddCardFormSubmit(evt) {
 }      
 
 function openAddPopup() {
-  // arrOfAddCardTextInput.forEach((input) => hideInvalidationMessage(input, config.textInputInvalidClass, config.visibleInvalidationErrorClass, config.invalidationErrorSelector))
   formPlaceLinkObj.value = '';
   formPlaceNameObj.value = '';
-  // manageSubmitButton(arrOfAddCardTextInput, submitButtonFromAddCard, config.submitButtonDisabledClass)
+  addPopupValidationObject.prototypePublicResetMethod();
   openPopupOverlay(popupAddCard);
 }    
 
