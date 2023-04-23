@@ -33,7 +33,7 @@ function openEditPopup() {
   const descriptonText = descriptonObj.textContent;
   formNameObj.value = nameText.trim();
   formDescriptionObj.value = descriptonText.trim();
-  editPopupValidationObject.prototypePublicResetMethod();
+  editPopupValidationObject.resetValidationErrors();
 }
 
 
