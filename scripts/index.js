@@ -1,7 +1,10 @@
-import { initialCards } from "./dataobjects.js";
+import { initialCards } from "./dataObjects.js";
 import { Card } from "./Card.js";
-import { FormValidator } from "./validation.js";
-import { validationConfig as config } from "./dataobjects.js"
+import { FormValidator } from "./FormValidator.js";
+import { validationConfig as config } from "./dataObjects.js"
+
+
+
 
 // editpopup vars
 const nameObj = document.querySelector('.profile__name');
@@ -25,14 +28,12 @@ function handleEditFormSubmit(evt) {
 }
 
 function openEditPopup() {
-  openPopupOverlay(popupOpenEditProfile);
+  openPopup(popupOpenEditProfile);
   const nameText = nameObj.textContent;
   const descriptonText = descriptonObj.textContent;
   formNameObj.value = nameText.trim();
   formDescriptionObj.value = descriptonText.trim();
   editPopupValidationObject.prototypePublicResetMethod();
-  console.log(formNameObj.name)
-  console.log(formDescriptionObj.name)
 }
 
 
@@ -43,12 +44,17 @@ export const figurePopupImage = figurePopup.querySelector('.popup__figure-popup-
 export const figurePopupCaption = figurePopup.querySelector('.popup__figure-popup-caption')
 
 function openFigurePopup(name, link) {
-  openPopupOverlay(figurePopup);
   figurePopupImage.src = link;
   figurePopupImage.alt = name;
   figurePopupCaption.textContent = name
+  openPopup(figurePopup);
 }      
 
+
+function createCard(item) {
+  const card = new Card(item, '#card-template', openFigurePopup)
+  return card.createCardDOMElement();
+}
 
 //closebyEcs vars
 
@@ -61,15 +67,14 @@ function closePopupByOverlayClick (e) {
 
 
 function closePopupByEsc(evt) {
-  
-  if (evt.keyCode === 27) {
+  if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
     closePopup(openedPopup);
   }
 }
 
 
-function openPopupOverlay(popupObj)  {
+function openPopup(popupObj)  {
   window.addEventListener('keydown',closePopupByEsc)
   popupObj.classList.add('popup_opened');
   
@@ -94,8 +99,8 @@ const addPopupValidationObject = new FormValidator(config, formAddCard)
 addPopupValidationObject.enableValidation();
 
 initialCards.forEach(element => {
-  const card = new Card(element, '#card-template')
-  prependElementInContainer(gridCards, card.createCardDOMElement())});
+  prependElementInContainer(gridCards, createCard(element))});
+
 
 
 function prependElementInContainer(container, element) {
@@ -108,17 +113,15 @@ function handleAddCardFormSubmit(evt) {
     name : formPlaceNameObj.value,
     link : formPlaceLinkObj.value
   }
-  const cardObject = new Card(dataObject, '#card-template')
-  prependElementInContainer(gridCards, cardObject.createCardDOMElement());
-  console.log('CARD CREATED')
+  prependElementInContainer(gridCards, createCard(dataObject));
   closePopup(popupAddCard);
 }      
 
 function openAddPopup() {
   formPlaceLinkObj.value = '';
   formPlaceNameObj.value = '';
-  addPopupValidationObject.prototypePublicResetMethod();
-  openPopupOverlay(popupAddCard);
+  addPopupValidationObject.resetValidationErrors();
+  openPopup(popupAddCard);
 }    
 
 // closeEventListeners

@@ -1,9 +1,9 @@
-import { figurePopup, figurePopupCaption, figurePopupImage, gridCards } from "./index.js";
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openFigurePopup) {
     this._templateSelector = templateSelector;
     this._name = data.name;
     this._link = data.link;
+    this._openFigurePopup = openFigurePopup;
   }
 
   _getTemplate() {
@@ -11,7 +11,7 @@ export class Card {
     return cardDOMClone
   }
 
-  _prototypeMarkupMetod() {
+  _createDOMCardMarkup() {
     this._element = this._getTemplate()
     this._cardDOMCloneImage = this._element.querySelector('.grid-cards__item-image');
     this._cardDOMCloneImage.src = this._link;
@@ -23,13 +23,6 @@ export class Card {
     return this._element;
   }
 
-  _openFigurePopup() {
-    figurePopup.classList.add('popup_opened')
-    figurePopupImage.alt = this._name;
-    figurePopupImage.src = this._link;
-    figurePopupCaption.textContent = this._name;
-  }
-
   _deleteClosestOnClick(event, selector) {
     event.target.closest(selector).remove()
   }
@@ -39,13 +32,13 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup()});
+    this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._name, this._link)});
     this._deleteCardButton.addEventListener('click', (event) => {this._deleteClosestOnClick(event,'.grid-cards__item')})
     this._likeButton.addEventListener('click',() => {this._toggleLike()})
   }
 
   createCardDOMElement() {
-    return this._prototypeMarkupMetod();
+    return this._createDOMCardMarkup();
   }
 
 }
