@@ -1,9 +1,11 @@
 export class Card {
-  constructor(data, templateSelector, openFigurePopup) {
+  constructor({firstValue, secondValue}, templateSelector, openFigurePopup) {
     this._templateSelector = templateSelector;
-    this._name = data.name;
-    this._link = data.link;
+    this._name = firstValue;
+    this._link = secondValue;
+    this._data = {name: this._name, link: this._link};
     this._openFigurePopup = openFigurePopup;
+    // this._handleCardClick = handleCardClick.
   }
 
   _getTemplate() {
@@ -32,7 +34,8 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._name, this._link)});
+    console.log(this._data)
+    this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._data)});
     this._deleteCardButton.addEventListener('click', (event) => {this._deleteClosestOnClick(event,'.grid-cards__item')})
     this._likeButton.addEventListener('click',() => {this._toggleLike()})
   }
