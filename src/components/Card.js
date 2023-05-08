@@ -33,7 +33,6 @@ export class Card {
   }
 
   _setEventListeners() {
-    console.log(this._data)
     this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._data)});
     this._deleteCardButton.addEventListener('click', this._deleteClosestOnClick)
     this._likeButton.addEventListener('click',() => {this._toggleLike()})
