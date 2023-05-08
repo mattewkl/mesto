@@ -7,24 +7,28 @@ import { Section } from "./components/Section.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { UserInfo } from "./components/UserInfo.js";
-import { initialCards, userDescriptionSelector, usernameSelector, popupEditProfileSelector } from "./scripts/dataobjects.js";
-
+import { 
+  initialCards,
+  userDescriptionSelector,
+  usernameSelector,
+  popupEditProfileSelector,
+  buttonOpenEditProfile,
+  formEditObj,
+  formAddCard,
+  buttonOpenAddCardPopup, }
+   from "./scripts/dataobjects.js";
 
 const userInfoObject = new UserInfo(usernameSelector, userDescriptionSelector)
 
-const addPopup = new PopupWithForm('.popup_purpouse_add-card', (event) => {
-  event.preventDefault();
-  const dataObject = addPopup.getInputValues(); 
-  gridSection.addItem(createCard({firstValue: dataObject.firstValue, secondValue: dataObject.secondValue}));
-  addPopup.close(); 
-})
+const addPopup = new PopupWithForm('.popup_purpouse_add-card', (object) => {
+  gridSection.addItem(createCard({firstValue: object['place-name'], secondValue: object.link}))
+  addPopup.close()
+}) 
 
 addPopup.setEventListeners();
 
-const popupEditProfile = new PopupWithForm(popupEditProfileSelector, (event) => {
-  event.preventDefault()
-  const dataObject = popupEditProfile.getInputValues();
-  userInfoObject.setUserInfo({name: dataObject.firstValue, description: dataObject.secondValue})
+const popupEditProfile = new PopupWithForm(popupEditProfileSelector, (object) => {
+  userInfoObject.setUserInfo({name: object.name, description: object.description})
   popupEditProfile.close();
 
 })
@@ -33,15 +37,12 @@ const imagePopup = new PopupWithImage('.popup_purpouse_figure');
 imagePopup.setEventListeners()
 
 const gridSection = new Section({items: initialCards, renderer: (element) => {
-  const card = new Card({firstValue: element.name, secondValue: element.link}, '#card-template', imagePopup.open)
-  return card.createCardDOMElement();
-
+  return createCard({firstValue: element.name, secondValue: element.link})
 }}, '.grid-cards')
 gridSection.renderInitialItems();
 
 // editpopup vars
-const buttonOpenEditProfile = document.querySelector('.profile__edit-button')
-const formEditObj = document.querySelector('.popup__form_purpouse_edit-profile')
+
 const editPopupValidationObject = new FormValidator(config, formEditObj);
 editPopupValidationObject.enableValidation();
 
@@ -49,16 +50,11 @@ editPopupValidationObject.enableValidation();
 function openEditPopup() {
   popupEditProfile.open();
   const dataObject = userInfoObject.getUserInfo();
-  console.log(dataObject)
-  popupEditProfile.setInputValues({firstValue: dataObject.name, secondValue: dataObject.description})
+  popupEditProfile.setInputValues(dataObject)
   editPopupValidationObject.resetValidationErrors();
 }
 
 
-// figurePopup vars
-export const figurePopup = document.querySelector('.popup_purpouse_figure')
-export const figurePopupImage = figurePopup.querySelector('.popup__figure-popup-image')
-export const figurePopupCaption = figurePopup.querySelector('.popup__figure-popup-caption')
 
 
 function createCard({firstValue, secondValue}) {
@@ -67,9 +63,7 @@ function createCard({firstValue, secondValue}) {
 }
 
 // addcard vars
-const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
-const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
-export const gridCards = document.querySelector('.grid-cards')
+
 
 const addPopupValidationObject = new FormValidator(config, formAddCard)
 addPopupValidationObject.enableValidation();

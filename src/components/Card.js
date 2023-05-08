@@ -5,7 +5,6 @@ export class Card {
     this._link = secondValue;
     this._data = {name: this._name, link: this._link};
     this._openFigurePopup = openFigurePopup;
-    // this._handleCardClick = handleCardClick.
   }
 
   _getTemplate() {
@@ -25,8 +24,8 @@ export class Card {
     return this._element;
   }
 
-  _deleteClosestOnClick(event, selector) {
-    event.target.closest(selector).remove()
+  _deleteClosestOnClick = () => {
+    this._element.remove()
   }
 
   _toggleLike() {
@@ -36,7 +35,7 @@ export class Card {
   _setEventListeners() {
     console.log(this._data)
     this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._data)});
-    this._deleteCardButton.addEventListener('click', (event) => {this._deleteClosestOnClick(event,'.grid-cards__item')})
+    this._deleteCardButton.addEventListener('click', this._deleteClosestOnClick)
     this._likeButton.addEventListener('click',() => {this._toggleLike()})
   }
 

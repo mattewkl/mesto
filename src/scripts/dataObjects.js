@@ -38,10 +38,18 @@ export const validationConfig = {
 const usernameSelector = '.profile__name'
 const userDescriptionSelector = '.profile__description'
 const popupEditProfileSelector = '.popup_purpouse_edit-profile'
+const buttonOpenEditProfile = document.querySelector('.profile__edit-button')
+const formEditObj = document.querySelector('.popup__form_purpouse_edit-profile')
+const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
+const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
 
 export {
   userDescriptionSelector,
   popupEditProfileSelector,
-  usernameSelector
+  usernameSelector,
+  buttonOpenEditProfile,
+  formEditObj,
+  formAddCard,
+  buttonOpenAddCardPopup,
 
 }

@@ -7,7 +7,9 @@ export class Section {
 
   renderInitialItems() {
     this._items.forEach(element => {
+      console.log(this._renderer(element))
       this.addItem(this._renderer(element))
+      console.log(element);
     });
 
   }
