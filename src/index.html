@@ -51,6 +51,30 @@
       </form>
     </div>
   </div>
+  <div class="popup popup_purpouse_delete-card">
+    <div class="popup__container">
+      <button class="button popup__close-button" type="button"></button>
+      <form action="#" class="popup__form popup__form_purpouse_delete-card" name="add-card" >
+        <h2 class="text popup__form-title">Вы уверены?</h2>
+          <input type="submit" class="popup__form-save-button" value="Да, я уверен">
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_purpouse_edit-avatar">
+    <div class="popup__container">
+      <button class="button popup__close-button" type="button"></button>
+      <form action="#" class="popup__form popup__form_purpouse_edit-avatar" name="edit-avatar" >
+        <h2 class="text popup__form-title">Обновить аватар</h2>
+        <div class="popup__text-input-container">
+          <input required type="url" name="link"
+          class="popup__form-text-input popup__form-text-input_purpouse_edit-avatar"
+          placeholder="Ссылка на картинку" >
+          <span class="popup__invalid popup__invalid_from_edit-avatar"></span>
+        </div>
+          <input type="submit" class="popup__form-save-button popup__form-save-button_disabled" value="Обновить">
+      </form>
+    </div>
+  </div>
   <div class="popup popup_purpouse_figure">
     <figure class="popup__figure-popup">
       <button class="button popup__close-button " type="button"></button>
@@ -64,7 +88,7 @@
   <main class="main">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="<%=require('./images/ivcusto.jpg')%>" alt="Рожа Кусто">
+        <img class="profile__avatar" src="#" alt="Аватар пользователя" tabindex="0">
         <div class="profile__info-container">
           <div class="profile__name-container">
             <h1 class="profile__name text">

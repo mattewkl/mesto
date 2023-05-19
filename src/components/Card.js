@@ -1,10 +1,11 @@
 export class Card {
-  constructor({firstValue, secondValue}, templateSelector, openFigurePopup) {
+  constructor({firstValue, secondValue}, templateSelector, openFigurePopup, openConfirmationPopup) {
     this._templateSelector = templateSelector;
     this._name = firstValue;
     this._link = secondValue;
     this._data = {name: this._name, link: this._link};
     this._openFigurePopup = openFigurePopup;
+    this._openConfirmationPopup = openConfirmationPopup;
   }
 
   _getTemplate() {
@@ -24,8 +25,8 @@ export class Card {
     return this._element;
   }
 
-  _deleteClosestOnClick = () => {
-    this._element.remove()
+  _handleDeleteButtonClick = () => {
+    this._openConfirmationPopup(this._element)
   }
 
   _toggleLike() {
@@ -34,7 +35,7 @@ export class Card {
 
   _setEventListeners() {
     this._cardDOMCloneImage.addEventListener('click', () => {this._openFigurePopup(this._data)});
-    this._deleteCardButton.addEventListener('click', this._deleteClosestOnClick)
+    this._deleteCardButton.addEventListener('click', () => {this._handleDeleteButtonClick();})
     this._likeButton.addEventListener('click',() => {this._toggleLike()})
   }
 

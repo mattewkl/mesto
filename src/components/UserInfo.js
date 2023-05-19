@@ -1,7 +1,8 @@
 export class UserInfo {
-  constructor(nameSelector, descriptionSelector) {
+  constructor(nameSelector, descriptionSelector, avatarSelector) {
     this._name = document.querySelector(nameSelector)
     this._description = document.querySelector(descriptionSelector)
+    this._avatar = document.querySelector(avatarSelector)
   }
 
   getUserInfo() {
@@ -15,5 +16,9 @@ export class UserInfo {
   setUserInfo({name, description}) {
     this._name.textContent = name.trim();
     this._description.textContent = description.trim();
+  }
+
+  updateAvatar(link) {
+    this._avatar.src = link;
   }
 }
