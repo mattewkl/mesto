@@ -44,8 +44,9 @@ const formAddCard = document.querySelector('.popup__form_purpouse_add-card')
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button')
 const popupUpdateAvatarSelector = '.popup_purpouse_edit-avatar'
 const popupUpdateAvatarForm = document.querySelector('.popup__form_purpouse_edit-avatar')
-const profileAvatar = document.querySelector('.profile__avatar')
+const profileAvatarBtn = document.querySelector('.profile__avatar-btn')
 const deleteConfirmationPopupSelector = '.popup_purpouse_delete-card'
+const editAvatarForm = document.querySelector('.popup__form_purpouse_edit-avatar')
 export {
   userDescriptionSelector,
   popupEditProfileSelector,
@@ -55,8 +56,8 @@ export {
   formAddCard,
   buttonOpenAddCardPopup,
   popupUpdateAvatarSelector,
-  profileAvatar,
   popupUpdateAvatarForm,
-  deleteConfirmationPopupSelector
-
+  deleteConfirmationPopupSelector,
+  editAvatarForm,
+  profileAvatarBtn
 }

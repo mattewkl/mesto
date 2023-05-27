@@ -21,4 +21,12 @@ export class UserInfo {
   updateAvatar(link) {
     this._avatar.src = link;
   }
+
+  setUserId(id) {
+    this._id = id;
+  }
+
+  getUserId() {
+    return this._id 
+  }
 }

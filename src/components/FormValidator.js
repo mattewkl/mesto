@@ -2,6 +2,7 @@
 export class FormValidator {
   constructor (config, formElement) {
     this._formElement = formElement;
+    console.log(this._formElement)
     this._formsSelector = config.forms;
     this._invalidationErrorSelector = config.invalidationErrorSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -64,14 +65,14 @@ export class FormValidator {
   }
 
   _hideInvalidationMessage() {
-    const invalidationError = document.querySelector(`${this._invalidationErrorSelector}${this._input.name}`)
+    const invalidationError = this._formElement.querySelector(`${this._invalidationErrorSelector}${this._input.name}`)
     this._input.classList.remove(this._textInputInvalidClass)
     invalidationError.classList.remove(this._visibleInvalidationErrorClass)
     invalidationError.textContent = ''
   }
 
   _showInvalidationMessage() {
-    const invalidationError = document.querySelector(`${this._invalidationErrorSelector}${this._input.name}`)
+    const invalidationError = this._formElement.querySelector(`${this._invalidationErrorSelector}${this._input.name}`)
     this._input.classList.add(this._textInputInvalidClass)
     invalidationError.classList.add(this._visibleInvalidationErrorClass)
     invalidationError.textContent = this._input.validationMessage

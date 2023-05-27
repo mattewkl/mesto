@@ -69,7 +69,7 @@
           <input required type="url" name="link"
           class="popup__form-text-input popup__form-text-input_purpouse_edit-avatar"
           placeholder="Ссылка на картинку" >
-          <span class="popup__invalid popup__invalid_from_edit-avatar"></span>
+          <span class="popup__invalid popup__invalid_from_link"></span>
         </div>
           <input type="submit" class="popup__form-save-button popup__form-save-button_disabled" value="Обновить">
       </form>
@@ -88,16 +88,15 @@
   <main class="main">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="#" alt="Аватар пользователя" tabindex="0">
+        
+        <button class="button profile__avatar-btn"><img class="profile__avatar" src="#" alt="Аватар пользователя" tabindex="0"></button>
         <div class="profile__info-container">
           <div class="profile__name-container">
             <h1 class="profile__name text">
-              Жак-Ив Кусто
             </h1>
             <button class="button profile__edit-button" type="button"></button>
           </div>
           <p class="profile__description text">
-            Исследователь океана
           </p>
         </div>
       </div>
@@ -109,7 +108,11 @@
         <img class="grid-cards__item-image" src="#" alt="#">
         <div class="grid-cards__caption-container">
           <h2 class="text grid-cards__caption"></h2>
-          <button class="button grid-cards__like-button" type="button"></button>
+          <div class="grid-cards__like-wrapper">
+            <button class="button grid-cards__like-button" type="button">
+            </button>
+            <p class="grid-cards__like-counter">0</p>
+          </div>
         </div>
       </div>
     </template>
