@@ -9,6 +9,7 @@ export class PopupWithForm extends Popup {
     this._submitBtn = this._form.querySelector('.popup__form-save-button')
     this._originalBtnText = this._submitBtn.value
 
+
   } 
 
   _getInputValues() {
@@ -34,7 +35,7 @@ export class PopupWithForm extends Popup {
     
   }
 
-  setOriginalBtnText() {
+  setOriginalBtnText = () => {
     this._submitBtn.value = this._originalBtnText;
   }
 

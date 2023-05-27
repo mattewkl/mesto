@@ -35,7 +35,6 @@ const deleteConfirmationPopup = new ConfirmationPopup(deleteConfirmationPopupSel
 })
 deleteConfirmationPopup.setEventListeners();
 const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarSelector, (object) => {
-  console.log(object.link)
   api.setUserAvatar({link: object.link})
   .then((res) => {
     userInfoObject.updateAvatar(res.avatar)
@@ -160,12 +159,10 @@ const api = new Api({
 
 Promise.all([api.getUserData(), api.getCardsData()])
 .then(([userData, cardsData]) => {
-  console.log(cardsData)
   userInfoObject.setUserInfo({name: userData.name, description: userData.about})
   userInfoObject.updateAvatar(userData.avatar)
   userInfoObject.setUserId(userData._id)
   cardsData.forEach((element) => (element._watcherId = userInfoObject.getUserId()))
   gridSection.renderItems(cardsData)
-  console.log(userInfoObject.getUserId())
 })
 
