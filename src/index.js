@@ -25,12 +25,13 @@ import {
   }
    from "./scripts/dataobjects.js";
 
-
 const deleteConfirmationPopup = new ConfirmationPopup(deleteConfirmationPopupSelector, (id) => {
   api.deleteCard(id)
-  .then(deleteConfirmationPopup.getElement().deleteSelf())
+  .then(() => 
+    {deleteConfirmationPopup.getElement().deleteSelf()
+    deleteConfirmationPopup.close()}
+  )
   .catch((err) => console.error(err))
-  .finally()
   
 })
 deleteConfirmationPopup.setEventListeners();
@@ -43,7 +44,6 @@ const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarSelector, (object) 
   .catch((err) => concole.error(err))
   .finally(popupUpdateAvatar.setOriginalBtnText)
   
-  popupUpdateAvatar.close();
 })
 popupUpdateAvatar.setEventListeners();
 
@@ -52,7 +52,7 @@ const userInfoObject = new UserInfo(usernameSelector, userDescriptionSelector, '
 const addPopup = new PopupWithForm('.popup_purpouse_add-card', (object) => {
   api.addCardData({name: object['place-name'], link: object.link})
   .then((res) => {
-    gridSection.addItem(createCard({firstValue: res.name, secondValue: res.link, ownerId: res.owner._id, watcherId: userInfoObject.getUserId(), likes: res.likes, cardId: res._id}))
+    gridSection.addItem(createCard({name: res.name, link: res.link, ownerId: res.owner._id, watcherId: userInfoObject.getUserId(), likes: res.likes, cardId: res._id}))
     addPopup.close()
 })
   .catch((err) => console.error(err))
@@ -78,14 +78,13 @@ imagePopup.setEventListeners()
 
 //изменить класс чтобы массив отрисовывался от внешнего элемента, а то вызывать создание экземпляра в асинхроне эт такое себе DONE
 const gridSection = new Section((element) => {
-  return createCard({firstValue: element.name, secondValue: element.link, ownerId: element.owner._id, watcherId: element._watcherId, likes: element.likes, cardId: element._id})
+  gridSection.addItem(createCard({name: element.name, link: element.link, ownerId: element.owner._id, watcherId: element._watcherId, likes: element.likes, cardId: element._id}))
 }, '.grid-cards')
 
 // editpopup vars
 
 const editPopupValidationObject = new FormValidator(config, formEditObj);
 editPopupValidationObject.enableValidation();
-
 
 function openEditPopup() {
   popupEditProfile.open();
@@ -94,30 +93,24 @@ function openEditPopup() {
   editPopupValidationObject.resetValidationErrors();
 }
 
-
-
-
-function createCard({firstValue, secondValue, ownerId, watcherId, likes, cardId}) {
-  const card = new Card({firstValue: firstValue, secondValue: secondValue, ownerId: ownerId, watcherId: watcherId, likes:likes, cardId: cardId}, '#card-template', imagePopup.open, deleteConfirmationPopup.open, (cardId, likebtn) => {
+function createCard({name, link, ownerId, watcherId, likes, cardId}) {
+  const card = new Card({name: name, link: link, ownerId: ownerId, watcherId: watcherId, likes:likes, cardId: cardId}, '#card-template', imagePopup.open, deleteConfirmationPopup.open, (cardId, likebtn) => {
     if (likebtn.classList.contains('grid-cards__like-button_active')) {
       api.deleteLike(cardId)
       .then((res) => {card.updateCounter(res.likes.length)})
       .catch((err) => console.error(err))
-      .finally()
     }
     else {
       api.putLike(cardId)
       .then((res) => {
         card.updateCounter(res.likes.length)})
       .catch((err) => console.error(err))
-      .finally()
     }
   })
   return card.createCardDOMElement();
 }
 
 // addcard vars
-
 
 const addPopupValidationObject = new FormValidator(config, formAddCard)
 addPopupValidationObject.enableValidation();
@@ -138,15 +131,11 @@ function openAddPopup() {
 const editAvatarValidationObject = new FormValidator(config, editAvatarForm)
 editAvatarValidationObject.enableValidation();
 
-
 // closeEventListeners
-
-
 
 buttonOpenEditProfile.addEventListener('click', openEditPopup)
 buttonOpenAddCardPopup.addEventListener('click', openAddPopup)
 profileAvatarBtn.addEventListener('click', openAvatarPopup)
-
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
@@ -154,8 +143,6 @@ const api = new Api({
     authorization: '288cde96-6ae7-492c-9b6e-fac63786831a',
     'Content-Type': 'application/json'
   }})
-
-
 
 Promise.all([api.getUserData(), api.getCardsData()])
 .then(([userData, cardsData]) => {
@@ -165,4 +152,5 @@ Promise.all([api.getUserData(), api.getCardsData()])
   cardsData.forEach((element) => (element._watcherId = userInfoObject.getUserId()))
   gridSection.renderItems(cardsData)
 })
+.catch((err) => console.error(err))
 

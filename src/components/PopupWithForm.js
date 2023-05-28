@@ -26,10 +26,14 @@ export class PopupWithForm extends Popup {
     })
   }
 
+  renderLoadingSubmitText = () => {
+    this._submitBtn.value = `${this._submitBtn.value}...`
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit',(evt) => { 
-      this._submitBtn.value = `${this._submitBtn.value}...`
+      this.renderLoadingSubmitText()
       evt.preventDefault()
       this._handleFormSubmitMethod(this._getInputValues())})
     

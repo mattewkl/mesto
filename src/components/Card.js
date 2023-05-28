@@ -1,11 +1,11 @@
 export class Card {
-  constructor({firstValue, secondValue, ownerId, watcherId, likes, cardId}, templateSelector, openFigurePopup, openConfirmationPopup, handleLike) {
+  constructor({name, link, ownerId, watcherId, likes, cardId}, templateSelector, openFigurePopup, openConfirmationPopup, handleLike) {
     this._templateSelector = templateSelector;
     this._likes = likes;
     this._likesCount = this._likes.length
     this._cardId = cardId;
-    this._name = firstValue;
-    this._link = secondValue;
+    this._name = name;
+    this._link = link;
     this._ownerId = ownerId;
     this._wathcerId = watcherId;
     this._handleLike = handleLike;

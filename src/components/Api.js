@@ -11,6 +11,7 @@ export class Api {
       return res.json()
     }
     else {
+      console.error(Promise.reject)
       return Promise.reject;
     }
   }
